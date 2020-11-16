@@ -1,0 +1,54 @@
+.Logo {
+    background-color: rgb(0, 0, 0);
+    padding: 0px;
+    padding-right: 30px;
+    height: 100%;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+.Logo img {
+    height: 100%;
+}
+
+/* Add a black background color to the top navigation */
+.Menubar {
+    height: 56px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #000000;
+    border-spacing: 10px;
+    display: inline-flex;
+    align-items: left;
+    padding: 0px 30px;
+    box-sizing: border-box;
+  }
+  .Menubar nav {
+    padding-left: auto;
+    height: 100%;
+  }
+
+  /* Style the links inside the navigation bar */
+  .Menubar a {
+    float: left;
+    color: #ffffff;
+    text-align: center;
+    padding: 19px 20px;
+    text-decoration: none;
+    font-size: 13px;
+  }
+  
+  /* Change the color of links on hover */
+  .Menubar a:hover {
+    background-color: rgb(255, 255, 255);
+    color: black;
+  }
+  
+  /* Add a color to the active/current link */
+  
+  .Menubar a.active:hover {
+    color: #004702;
+  }
+  

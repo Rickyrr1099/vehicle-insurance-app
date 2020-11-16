@@ -1,12 +1,18 @@
+import { Component } from 'react';
 import './App.css';
+import Menubar from './components/Menubar';
 
-const App = ()=> {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Hello React App!!</h1>
-      </header>
-    </div>
-  );
+
+class App extends Component{
+
+  render() {
+    return (
+      <div>
+        <Menubar/>
+        
+      </div>  
+    );
+  }
 }
+
 export default App;
