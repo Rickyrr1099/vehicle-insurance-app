@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import './App.css';
-import Menubar from './components/Menubar';
+import Menubar from './components/Menubar/Menubar';
+import Registration from './containers/Registration/Registration';
 
 
 class App extends Component{
@@ -8,8 +9,8 @@ class App extends Component{
   render() {
     return (
       <div>
-        <Menubar/>
-        
+        <Menubar />
+        <Registration />    
       </div>  
     );
   }

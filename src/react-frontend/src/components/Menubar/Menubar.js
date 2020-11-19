@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './Menubar.css';
-import deloittelogo from '../Deloitte-logo.jpg';
+import deloittelogo from '../../assets/images/Deloitte-logo.jpg'
 
 const menubar = (props) => {
 

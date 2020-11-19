@@ -21,12 +21,10 @@
     background-color: #000000;
     border-spacing: 10px;
     display: inline-flex;
-    align-items: left;
     padding: 0px 30px;
     box-sizing: border-box;
   }
   .Menubar nav {
-    padding-left: auto;
     height: 100%;
   }
 

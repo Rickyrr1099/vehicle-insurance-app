@@ -1,0 +1,10 @@
+.Registration {
+    width: 50%;
+    margin: auto;
+    padding-top: 7%;
+    height: 450px;
+    overflow: -moz-hidden-unscrollable;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1rem;
+}
