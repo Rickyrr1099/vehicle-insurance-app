@@ -1,0 +1,18 @@
+.Login {
+    height: 100%;
+    float: left;
+    display: block;
+    justify-content: center;
+    width: 50%;
+    margin-left: 260px;
+    margin-top: 20px;
+    padding-bottom: 10px;
+    overflow: -moz-hidden-unscrollable;
+    background-color: rgb(236, 246, 255);
+    border: 1px solid rgb(109, 109, 109);
+    box-shadow: 0 2px 3px rgb(78, 78, 78);
+    box-sizing: border-box;
+    background-origin: padding-box;
+    text-align: center;
+    font-size: small;
+}

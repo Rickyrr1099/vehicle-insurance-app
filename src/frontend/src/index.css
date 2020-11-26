@@ -1,0 +1,12 @@
+body {
+  margin: 0;
+  background-color: rgb(104, 200, 255);  
+  font-family: 'Segoe UI';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
