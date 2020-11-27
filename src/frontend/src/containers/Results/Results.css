@@ -6,6 +6,7 @@
     width: 60%;
     margin-left: 230px;
     margin-top: 20px;
+    margin-bottom: 40px;
     padding-bottom: 10px;
     overflow: hidden;
     background-color: rgb(236, 246, 255);
@@ -37,7 +38,6 @@
 .InsuranceOptions {
     float: left;
 }
-
 
 .currSign:before { 
     content: '₹'; 

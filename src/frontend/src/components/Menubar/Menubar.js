@@ -7,6 +7,7 @@ import Results from '../../containers/Results/Results';
 import './Menubar.css';
 import deloittelogo from '../../assets/images/Deloitte-logo.jpg'
 import Registration from '../../containers/Registration/Registration';
+import TransactionDetails from '../../containers/TransactionDetails/TransactionDetails';
 
 const menubar = (props) => {
 
@@ -46,6 +47,7 @@ const menubar = (props) => {
                 <Route path='/login' component={Login} />
                 <Route path='/details' component={Details} />
                 <Route path='/results' component={Results}/>
+                <Route path='/payment' component={TransactionDetails}/>
                 <Route path='/' component={Registration} />             
                 <Route render={() => <h1>Not found</h1>}/>
             </Switch>
