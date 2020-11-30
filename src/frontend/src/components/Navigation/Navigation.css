@@ -1,5 +1,5 @@
 /* Add a black background color to the top navigation */
-.Menubar {
+.Navigation {
     height: 100%;
     top: 0;
     left: 0;
@@ -22,11 +22,11 @@
     height: 100%;
 }
 
-.Menubar nav {
+.Navigation nav {
     height: 100%;
   }
 
-.Menubar ul {
+.Navigation ul {
     list-style: none;
     margin: 0;
     margin-bottom: 0%;
@@ -36,7 +36,7 @@
 }
 
   /* Style the links inside the navigation bar */
-.Menubar li {
+.Navigation li {
   float: left;
   padding-top: 0%;
   height: 100%;
@@ -46,11 +46,11 @@
 }
   
   /* Change the color of links on hover */
-.Menubar li:hover {
+.Navigation li:hover {
   background-color: rgb(146, 143, 143);
 }
 
-.Menubar a {  
+.Navigation a {  
   text-decoration: none;
   color: white;
 }

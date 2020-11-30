@@ -1,18 +1,18 @@
 import React from 'react';
-import { Route, NavLink, Switch } from 'react-router-dom';
+import { Route, NavLink, Switch, Redirect } from 'react-router-dom';
 
 import Login from '../../containers/Login/Login';
 import Details from '../../containers/Details/Details';
 import Results from '../../containers/Results/Results';
-import './Menubar.css';
+import './Navigation.css';
 import deloittelogo from '../../assets/images/Deloitte-logo.jpg'
 import Registration from '../../containers/Registration/Registration';
 import TransactionDetails from '../../containers/TransactionDetails/TransactionDetails';
 
-const menubar = (props) => {
+const Navigation = (props) => {
 
     return(
-        <div className='Menubar'>
+        <div className='Navigation'>
             <header style={{display: "flex"}}>
                 <div className='Logo' style={{height: props.height}}>
                     <img src={deloittelogo} alt="Deloitte Logo" />
@@ -48,11 +48,11 @@ const menubar = (props) => {
                 <Route path='/details' component={Details} />
                 <Route path='/results' component={Results}/>
                 <Route path='/payment' component={TransactionDetails}/>
-                <Route path='/' component={Registration} />             
+                <Redirect path='/register' component={Registration} />             
                 <Route render={() => <h1>Not found</h1>}/>
             </Switch>
         </div>
     );
 }
 
-export default menubar;
+export default Navigation;
