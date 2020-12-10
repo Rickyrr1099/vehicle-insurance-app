@@ -1,7 +1,7 @@
 import { Component } from 'react';
 
 import './App.css';
-import Menubar from './components/Menubar/Menubar';
+import Navigation from './components/Navigation/Navigation';
 
 
 class App extends Component{
@@ -9,7 +9,7 @@ class App extends Component{
   render() {
     return (
       <div className='App'>
-        <Menubar />  
+        <Navigation />  
       </div>  
     );
   }

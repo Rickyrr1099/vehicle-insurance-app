@@ -1,19 +1,29 @@
 import React, { Component } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Alert } from 'react-bootstrap';
 
+import Spinner from '../../components/Spinner/Spinner';
 import './TransactionDetails.css';
 
-class transactionDetails extends Component{
-
+class TransactionDetails extends Component{
+  
     state = {
-       
-    }    
+        cancelled: false,
+        purchased: false
+    }
+
+    cancelHandler = () => {
+        this.setState({...this.state, cancelled: true});
+    }
+    purchasedHandler = () => {
+        this.setState({...this.state, purchased: true});
+    }
+
     render() {
-        return (
-            <div className='TransactionDetails'>
-                <div className='Header'>
-                    <h4>Transaction Details</h4>
-                </div>
+
+        let form = <Spinner />;
+
+        form = (
+            <div>
                 <div style={{padding: 30}}>
                     <Form>
                         <Form.Group controlId='formBasicText'>
@@ -45,13 +55,46 @@ class transactionDetails extends Component{
                     </Form>
                     <div className='BillAmount'><strong>4314</strong></div>
                     <div style={{paddingLeft: 100}}>
-                        <Button variant= 'secondary'>Cancel</Button>
-                        <Button style={{marginLeft: 20, width: 80}} variant='primary'>Pay</Button>
+                        <Button variant= 'secondary' 
+                                onClick={this.cancelHandler}>Cancel</Button>
+                        <Button style={{marginLeft: 20, width: 80}} 
+                                variant='primary'
+                                onClick={this.purchasedHandler}>Pay</Button>
                     </div>
                 </div>
+            </div>
+        );
+
+        if (this.state.cancelled === true) {
+            form = (
+                <Alert variant="danger" dismissible>
+                    <Alert.Heading>Payment cancelled!</Alert.Heading>
+                    <p>
+                        Kindly re-select insurance details and complete payment process.
+                    </p>
+                </Alert>
+            );
+        }
+        if (this.state.purchased === true) {
+            form = (
+                <Alert variant="success" dismissible>
+                    <Alert.Heading>Payment successful!</Alert.Heading>
+                    <p>
+                        You will receive an e-mail confirmation for your payment.
+                    </p>
+                </Alert>
+            );
+        }
+
+        return (
+            <div className='TransactionDetails'>
+                <div className='Header'>
+                    <h4>Transaction Details</h4>
+                </div>
+                {form}
             </div>
         );
     }
 }
 
-export default transactionDetails;
+export default TransactionDetails;

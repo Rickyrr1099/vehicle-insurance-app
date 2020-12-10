@@ -22,6 +22,9 @@ public class Customer {
     private long contactNumber;
     private String vehicleNumber;
 
+    public Customer() {
+    }
+
     public Customer(String email, String firstName, String lastName, LocalDate dob,
                     long contactNumber, String vehicleNumber) {
         this.email = email;

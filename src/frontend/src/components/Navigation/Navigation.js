@@ -47,10 +47,11 @@ const Navigation = (props) => {
                 <Route path='/login' component={Login} />
                 <Route path='/details' component={Details} />
                 <Route path='/results' component={Results}/>
-                <Route path='/payment' component={TransactionDetails}/>
-                <Redirect path='/register' component={Registration} />             
-                <Route render={() => <h1>Not found</h1>}/>
+                <Route path='/payment' component={TransactionDetails}/>                             
+                <Route path='/register' component={Registration} />
+                <Redirect to='/register'/>
             </Switch>
+            {/* <Route render={() => <h1>Not found</h1>}/> */}
         </div>
     );
 }

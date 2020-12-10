@@ -8,6 +8,10 @@ import com.deloitte.vehicleinsuranceapp.repository.InsuranceRepository;
 import com.deloitte.vehicleinsuranceapp.repository.VehicleRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
+
 @Service
 public class VehicleInsuranceServiceImpl implements VehicleInsuranceService {
 
@@ -28,6 +32,21 @@ public class VehicleInsuranceServiceImpl implements VehicleInsuranceService {
     }
 
     @Override
+    public List<String> getCustomerEmails() {
+
+        List<Customer> customers = customerRepository.findAll();
+
+        List<String> emails = new ArrayList<>();
+
+        ListIterator<Customer> iterator = customers.listIterator();
+        while (iterator.hasNext()) {
+            String email = iterator.next().getEmail();
+            emails.add(email);
+        }
+        return emails;
+    }
+
+    @Override
     public void saveVehicleDetails(Vehicle vehicle) {
         vehicleRepository.save(vehicle);
     }
@@ -45,7 +64,6 @@ public class VehicleInsuranceServiceImpl implements VehicleInsuranceService {
             newVehicle.setManufacturer(v.getManufacturer());
             newVehicle.setModel(v.getModel());
             newVehicle.setRegistrationYear(v.getRegistrationYear());
-            System.out.println(newVehicle.toString());
             return newVehicle;
         }
         else { return null; }

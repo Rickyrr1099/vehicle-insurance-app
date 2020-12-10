@@ -16,6 +16,9 @@ public class Vehicle {
     private String model;
     private int registrationYear;
 
+    public Vehicle() {
+    }
+
     public Vehicle(String email, String vehicleType, boolean hasPersonalAccidentCover,
                    String city, String manufacturer, String model, int registrationYear) {
         this.email = email;
@@ -42,10 +45,6 @@ public class Vehicle {
 
     public Vehicle(String email) {
         this.email = email;
-    }
-
-    public Vehicle() {
-
     }
 
     public String getEmail() {

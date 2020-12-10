@@ -1,26 +1,141 @@
 import React, { Component } from 'react';
-import { Button, Table } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { Button, Alert, Table } from 'react-bootstrap';
+
+import axios from '../../axios';
+import Spinner from '../../components/Spinner/Spinner';
+import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 
 import './Results.css';
 
-class results extends Component {
-    render () {
-        return(
-            <div className='Results'>
-                <div className='Header'>
-                    <h4>Results</h4>
-                </div>
+class Results extends Component {
+
+    state = {
+        email: '',
+        city: '',
+        manufacturer: '',
+        model: '',
+        year: null,
+        insurer: '',
+        idv: null,
+        premium: null,
+        loading: false,
+        isregistered: false
+    }
+
+    componentDidMount () {
+        console.log( this.props );
+
+        if ( this.props.customerEmail !== '' ) {
+            this.setState({ 
+                ...this.state, 
+                email: this.props.customerEmail,
+                isregistered: true});
+        }
+
+        axios.get('/results/'+this.state.email)
+            .then(response => {
+                
+                this.setState({
+                    ...this.state,
+                    city: response.city,
+                    manufacturer: response.manufacturer,
+                    model: response.model,
+                    year: response.registrationYear
+                });
+            }).catch( error => {
+                console.log( error );
+            } );
+
+    }
+
+    saveInsuranceHandler = ( event ) => {
+        switch (event.target.value) {
+            case 'bajaj':
+                this.setState({
+                    ...this.state,
+                    insurer: 'Bajaj Allianz',
+                    idv: 50634,
+                    premium: 4314
+                });
+                break;
+            case 'kotak':
+                this.setState({
+                    ...this.state,
+                    insurer: 'Kotak General Insurance',
+                    idv: 49000,
+                    premium: 3500
+                });
+                break;
+            case 'hdfc':
+                this.setState({
+                    ...this.state,
+                    insurer: 'HDFC ERGO',
+                    idv: 55000,
+                    premium: 4900
+                });
+                break;
+            case 'oriental':
+                this.setState({
+                    ...this.state,
+                    insurer: 'Oriental Insurance',
+                    idv: 48000,
+                    premium: 3800
+                });
+                break;
+            default: 
+            this.setState({
+                ...this.state,
+                insurer: '',
+                idv: 0,
+                premium: 0
+            });
+        }
+        console.log(this.state);
+    }
+
+    // make loading false
+    insuranceSubmitHandler = () => {
+
+        const data = {            
+            email: this.state.email,
+            insurer: this.state.insurer,
+            idv: this.state.idv,
+            premium: this.state.premium
+        };
+        console.log(data);
+
+        axios.post( '/results', data )
+            .then( response => {
+                console.log( response );
+                this.setState( { ...this.state, loading: false } );
+                this.props.history.push('/payment/'+data.email);
+            } )
+            .catch( error => {
+                console.log( error );
+                this.setState( { ...this.state, loading: false } );
+            } );
+    }
+
+    toDetailsHandler = () => {
+        this.props.history.push('/details/'+this.state.email);
+    }
+
+    render () {      
+
+        let form = (
+            <div>
                 <div className='ResultsBody'>
                     <h8><strong>Your Vehicle Details</strong></h8>  
                     <div className='VehicleSummary'>
                         <span>
-                            <p>CITY:  <strong style={{color:'mediumseagreen'}}>City</strong>
+                            <p>CITY:  <strong style={{color:'mediumseagreen'}}>{this.state.city}</strong>
                             <p style={{paddingRight: 80}}>MANUFACTURER:  <strong style={{color:'mediumseagreen'}}>
-                                Manufacturer</strong></p></p>
+                            {this.state.manufacturer}</strong></p></p>
                         </span>
                         <span>
-                            <p>MODEL:  <strong style={{color:'mediumseagreen'}}>Model</strong>
-                            <p>REGISTRATION YEAR:  <strong style={{color:'mediumseagreen'}}>Year</strong></p></p>
+                            <p>MODEL:  <strong style={{color:'mediumseagreen'}}>{this.state.model}</strong>
+                            <p>REGISTRATION YEAR:  <strong style={{color:'mediumseagreen'}}>{this.state.year}</strong></p></p>
                         </span>
                     </div>
                     <div style={{paddingTop: 30, textAlign: "left" }}>
@@ -39,7 +154,7 @@ class results extends Component {
                         </thead>
                         <tbody>
                             <tr>
-                            <td><input type='radio' value='bajaj' name='insurance'/></td>
+                            <td><input type='radio' value='bajaj' name='insurance' onClick={this.saveInsuranceHandler}/></td>
                             <td>Bajaj Allianz</td>
                             <td className='currSign'>50634</td>
                             <td className='currSign'>4314</td>
@@ -65,13 +180,52 @@ class results extends Component {
                         </tbody>
                     </Table>  
                     <div style={{marginLeft: 200, paddingTop: 20 }} >
-                        <Button type='reset' variant='secondary'>Back</Button>
-                        <Button style={{marginLeft: 30}} type='submit' variant='primary'>Continue</Button>
+                        <Button type='reset' 
+                                variant='secondary' 
+                                onClick={this.toDetailsHandler}>Back</Button>
+                        <Button style={{marginLeft: 30}} 
+                                type='submit' 
+                                variant='primary' 
+                                onClick={this.insuranceSubmitHandler}>Continue</Button>
                     </div> 
                 </div>              
             </div>
         );
+
+
+        if ( this.state.loading === true && this.state.isregistered === false ) {
+            form = <Spinner />
+        }
+
+        let alertMessage = null;
+        if ( this.state.isregistered === false) {
+            alertMessage = (
+                <Alert variant="danger" dismissible>
+                     <Alert.Heading>Oops, you are not registered!</Alert.Heading>
+                     <p>
+                     Kindly register/login in order to enter insurance details.
+                     </p>
+                 </Alert>
+            );
+        }
+
+        return(
+            <div className='Results'>
+                <div className='Header'>
+                    <h4>Results</h4>
+                </div>
+                {alertMessage}
+                {form}
+            </div>
+            
+        );
     }
 }
 
-export default results;
+const mapStateToProps = state => {
+    return {
+        customerEmail: state.email       
+    }
+}
+
+export default connect(mapStateToProps)(withErrorHandler( Results, axios ));

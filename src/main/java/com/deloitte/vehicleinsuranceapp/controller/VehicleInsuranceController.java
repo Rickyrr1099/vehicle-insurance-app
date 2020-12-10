@@ -6,10 +6,16 @@ import com.deloitte.vehicleinsuranceapp.model.Vehicle;
 import com.deloitte.vehicleinsuranceapp.service.VehicleInsuranceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/vehicleinsurance")
 public class VehicleInsuranceController {
 
@@ -22,6 +28,12 @@ public class VehicleInsuranceController {
         return new ResponseEntity("Customer registered successfully!", HttpStatus.CREATED);
     }
 
+    @GetMapping(value = "/registered-emails")
+    public ResponseEntity<List<String>> registerCustomer() {
+        List<String> emails = vehicleInsuranceService.getCustomerEmails();
+        return new ResponseEntity(emails, HttpStatus.OK);
+    }
+
     @PostMapping(value = "/details")
     public ResponseEntity<String> saveVehicleDetails (@RequestBody Vehicle vehicle) {
         vehicleInsuranceService.saveVehicleDetails(vehicle);
@@ -29,10 +41,11 @@ public class VehicleInsuranceController {
                 "successfully for registered e-mail: "+ vehicle.getEmail(), HttpStatus.CREATED);
     }
 
-    @GetMapping(value = "/results/{email}")
+    @GetMapping(value = "/results/{email}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Vehicle> getVehicleDetails (@PathVariable String email) {
         Vehicle vehicleDetails = vehicleInsuranceService.getVehicleDetails(email);
-        return new ResponseEntity(vehicleDetails, HttpStatus.OK);
+        System.out.println(vehicleDetails);
+        return new ResponseEntity<>(vehicleDetails, HttpStatus.OK);
     }
 
     @PostMapping(value = "/results")
@@ -42,3 +55,4 @@ public class VehicleInsuranceController {
                 "successfully for registered e-mail: "+ insurance.getEmail(), HttpStatus.CREATED);
     }
 }
+

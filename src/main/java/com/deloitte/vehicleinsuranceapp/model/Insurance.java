@@ -12,14 +12,15 @@ public class Insurance {
     private String insurerName;
     private int idv;
     private int premium;
-    private boolean purchased;
 
-    public Insurance(String email, String insurerName, int idv, int premium, boolean purchased) {
+    public Insurance() {
+    }
+
+    public Insurance(String email, String insurerName, int idv, int premium) {
         this.email = email;
         this.insurerName = insurerName;
         this.idv = idv;
         this.premium = premium;
-        this.purchased = purchased;
     }
 
     public String getEmail() {
@@ -52,13 +53,5 @@ public class Insurance {
 
     public void setPremium(int premium) {
         this.premium = premium;
-    }
-
-    public boolean isPurchased() {
-        return purchased;
-    }
-
-    public void setPurchased(boolean purchased) {
-        this.purchased = purchased;
     }
 }
